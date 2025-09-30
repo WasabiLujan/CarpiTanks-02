@@ -21,9 +21,10 @@ var arriba_a_la_derecha = Vector2(1,-1)
 var arriba_a_la_izquierda = Vector2(-1,-1)
 var abajo_a_la_derecha = Vector2(1,1)
 var abajo_a_la_izquierda = Vector2(-1,1)
+var detenerce = Vector2(0,0)
 
 func obtener_dierccion_random():
-	var rango = randi() % 8
+	var rango = randi() % 9
 	match rango:
 		0: return arriba
 		1: return abajo
@@ -33,6 +34,7 @@ func obtener_dierccion_random():
 		5: return arriba_a_la_izquierda
 		6: return abajo_a_la_derecha
 		7: return abajo_a_la_izquierda
+		8: return detenerce
 
 
 func _on_Timer_timeout():
