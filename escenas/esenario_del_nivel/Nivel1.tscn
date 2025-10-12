@@ -30,12 +30,12 @@ texture = ExtResource( 4 )
 [node name="laguito" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="laguito"]
-position = Vector2( 496, 300 )
+position = Vector2( 647, 328 )
 scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 1 )
 
 [node name="Tanque" parent="." instance=ExtResource( 3 )]
-position = Vector2( 250, 137 )
+position = Vector2( 189, 109 )
 
 [node name="TanqueSecarria2" parent="." groups=["obstaculos y limites"] instance=ExtResource( 2 )]
 position = Vector2( 675, -198 )
@@ -46,19 +46,28 @@ position = Vector2( 97, 171 )
 [node name="Piedras" type="Node2D" parent="." groups=["obstaculos y limites"]]
 
 [node name="piedra" parent="Piedras" instance=ExtResource( 6 )]
-position = Vector2( 824, 183 )
+position = Vector2( 653, 166 )
 
 [node name="piedra2" parent="Piedras" instance=ExtResource( 5 )]
-position = Vector2( 159, 457 )
+position = Vector2( 292, 162 )
 
 [node name="piedra4" parent="Piedras" instance=ExtResource( 6 )]
-position = Vector2( 334, 282 )
+position = Vector2( 228, 550 )
 
 [node name="piedra3" parent="Piedras" instance=ExtResource( 6 )]
-position = Vector2( 751, 494 )
+position = Vector2( 721, 511 )
 
 [node name="piedra5" parent="Piedras" instance=ExtResource( 5 )]
-position = Vector2( 86, 75 )
+position = Vector2( 126, 259 )
+
+[node name="piedra6" parent="Piedras" instance=ExtResource( 5 )]
+position = Vector2( 747, 237 )
+
+[node name="piedra7" parent="Piedras" instance=ExtResource( 5 )]
+position = Vector2( 937, 350 )
+
+[node name="piedra8" parent="Piedras" instance=ExtResource( 6 )]
+position = Vector2( 598, 538 )
 
 [node name="Limites" type="StaticBody2D" parent="."]
 
