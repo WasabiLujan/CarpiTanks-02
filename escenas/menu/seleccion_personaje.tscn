@@ -1,0 +1,93 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://asset/fondos/fondoJuego.png" type="Texture" id=1]
+[ext_resource path="res://asset/fuente/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://asset/cards/aramiPixel.png" type="Texture" id=3]
+[ext_resource path="res://asset/cards/comandantePixel.png" type="Texture" id=4]
+[ext_resource path="res://asset/cards/JasyPixel.png" type="Texture" id=5]
+[ext_resource path="res://asset/cards/PariPixel.png" type="Texture" id=6]
+[ext_resource path="res://asset/cards/katuPixel.png" type="Texture" id=7]
+[ext_resource path="res://escenas/menu/pj_card.tscn" type="PackedScene" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="seleccion_personaje" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1040.0
+margin_bottom = 603.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = 249.0
+margin_top = 91.0
+margin_right = 789.0
+margin_bottom = 121.0
+custom_colors/font_color = Color( 0.87451, 0.447059, 0.0941176, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Elegí un Personaje"
+
+[node name="comandante" parent="." instance=ExtResource( 8 )]
+margin_left = 64.0
+margin_top = 192.0
+margin_right = -832.0
+margin_bottom = -193.0
+imagen = ExtResource( 4 )
+nombre = "Comandante"
+
+[node name="arami" parent="." instance=ExtResource( 8 )]
+margin_left = 256.0
+margin_top = 192.0
+margin_right = -640.0
+margin_bottom = -193.0
+imagen = ExtResource( 3 )
+nombre = "Arami"
+
+[node name="katu" parent="." instance=ExtResource( 8 )]
+margin_left = 448.0
+margin_top = 192.0
+margin_right = -448.0
+margin_bottom = -193.0
+imagen = ExtResource( 7 )
+nombre = "Katu"
+
+[node name="jasy" parent="." instance=ExtResource( 8 )]
+margin_left = 640.0
+margin_top = 192.0
+margin_right = -256.0
+margin_bottom = -193.0
+imagen = ExtResource( 5 )
+nombre = "Jasy"
+
+[node name="pari" parent="." instance=ExtResource( 8 )]
+margin_left = 832.0
+margin_top = 192.0
+margin_right = -64.0
+margin_bottom = -193.0
+imagen = ExtResource( 6 )
+nombre = "Pari"
+
+[node name="volver" type="Button" parent="."]
+margin_left = 24.0
+margin_top = 536.0
+margin_right = 160.0
+margin_bottom = 572.0
+custom_colors/font_color = Color( 0.87451, 0.447059, 0.0941176, 1 )
+custom_colors/font_color_hover = Color( 0.027451, 0.211765, 0.25098, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Volver"
+
+[connection signal="pressed" from="volver" to="comandante" method="_on_volver_pressed"]

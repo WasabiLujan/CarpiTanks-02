@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://asset/fondos/fondoJuego.png" type="Texture" id=1]
+[ext_resource path="res://asset/fuente/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://asset/cards/chatarra1.png" type="Texture" id=3]
+[ext_resource path="res://asset/cards/TanqueLunar.png" type="Texture" id=4]
+[ext_resource path="res://asset/cards/algatank.png" type="Texture" id=5]
+[ext_resource path="res://escenas/menu/tanque_card.tscn" type="PackedScene" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="seleccion_tanque" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 248, 560 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 1040.0
+margin_bottom = 603.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Label" type="Label" parent="."]
+margin_left = 249.0
+margin_top = 91.0
+margin_right = 789.0
+margin_bottom = 121.0
+custom_colors/font_color = Color( 0.87451, 0.447059, 0.0941176, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Elegí un Tanque"
+
+[node name="chatarra" parent="." instance=ExtResource( 6 )]
+margin_left = 128.0
+margin_top = 192.0
+margin_right = -726.0
+margin_bottom = -188.0
+imagen = ExtResource( 3 )
+nombre = "Chatarra 1"
+
+[node name="alga" parent="." instance=ExtResource( 6 )]
+margin_left = 392.0
+margin_top = 192.0
+margin_right = -462.0
+margin_bottom = -188.0
+imagen = ExtResource( 5 )
+nombre = "AlgaTank"
+
+[node name="lunar" parent="." instance=ExtResource( 6 )]
+margin_left = 648.0
+margin_top = 192.0
+margin_right = -206.0
+margin_bottom = -188.0
+imagen = ExtResource( 4 )
+nombre = "Tanque Lunar"
+
+[node name="volver_t" type="Button" parent="."]
+margin_left = 24.0
+margin_top = 536.0
+margin_right = 160.0
+margin_bottom = 572.0
+custom_colors/font_color = Color( 0.87451, 0.447059, 0.0941176, 1 )
+custom_colors/font_color_hover = Color( 0.027451, 0.211765, 0.25098, 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Volver"
+
+[connection signal="pressed" from="volver_t" to="chatarra" method="_on_volver_t_pressed"]

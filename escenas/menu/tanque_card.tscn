@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://escenas/menu/pj_card.gd" type="Script" id=1]
+[ext_resource path="res://asset/fuente/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.027451, 0.211765, 0.25098, 1 )
+draw_center = false
+shadow_size = 3
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="pj_card" type="Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 73.0
+margin_top = 263.0
+margin_right = -731.0
+margin_bottom = -134.0
+grow_horizontal = 0
+grow_vertical = 0
+custom_styles/hover = SubResource( 3 )
+icon_align = 1
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -104.5
+margin_top = -2.0
+margin_right = 115.5
+margin_bottom = 198.0
+grow_horizontal = 0
+grow_vertical = 0
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -16.0
+margin_right = 64.0
+grow_horizontal = 2
+custom_colors/font_color = Color( 0.87451, 0.447059, 0.0941176, 1 )
+custom_fonts/font = SubResource( 2 )
+align = 1
+
+[connection signal="pressed" from="." to="." method="_on_pj_card_pressed"]
