@@ -1,20 +1,16 @@
 extends KinematicBody2D
 
-export var velocidad = 220
-export var velocidad_rotacion = 9.9
+var velocidad = 220
+var velocidad_rotacion = 9.9
 # escena del proyectil (arrastrala desde el FileSystem al inspector o deja vacío y usá preload)
 export(PackedScene) var escena_proyectil
 # tiempo mínimo entre disparos (segundos)
-export var fire_rate = 0.25
+var fire_rate = 0.25
 
 var tamanio_pantalla = Vector2(1920, 1080)
 
 # Dirección de movimiento actual
 var direccion = Vector2.ZERO
-
-# Tamaño del tanque
-var mitad_ancho = 0
-var mitad_alto = 0
 
 # control de cooldown para disparos
 var _fire_cooldown = 0.0
@@ -22,6 +18,7 @@ var _fire_cooldown = 0.0
 func _ready():
 	# Obtener tamaño del sprite
 	var sprite = $Sprite
+	""""
 	if sprite and sprite.texture:
 		mitad_ancho = sprite.texture.get_size().x / 2
 		mitad_alto = sprite.texture.get_size().y / 2
@@ -29,10 +26,7 @@ func _ready():
 		# valores por defecto si no hay sprite
 		mitad_ancho = 16
 		mitad_alto = 16
-
-	# Asegurar que el tanque empiece dentro de los límites
-	position.x = clamp(position.x, mitad_ancho, tamanio_pantalla.x - mitad_ancho)
-	position.y = clamp(position.y, mitad_alto, tamanio_pantalla.y - mitad_alto)
+	"""
 
 func _physics_process(delta):
 	# actualizar cooldown
@@ -60,6 +54,8 @@ func mover():
 			Input.is_action_just_released("ui_down")):
 		direccion = Vector2.ZERO
 
+
+#ARREGLAR POR QUE NO HACE DIAGONAL CUANDO ESTA LLENDO DE UN COSTADO Y PRECIONO A LA VEZ ARRIBA O ABAJO
 func rotar(delta):
 	if direccion != Vector2.ZERO: #direccion = nueva_direccion
 		var angulo_deseado = direccion.angle()
@@ -69,11 +65,11 @@ func rotar(delta):
 	# Disparo con click izquierdo (acción "shoot")
 	if Input.is_action_just_pressed("shoot") and _fire_cooldown <= 0.0:
 		_disparar()
-
+""""
 	# Limitar posición a los bordes teniendo en cuenta el tamaño del tanque
 	position.x = clamp(position.x, mitad_ancho, tamanio_pantalla.x - mitad_ancho)
 	position.y = clamp(position.y, mitad_alto, tamanio_pantalla.y - mitad_alto)
-
+"""
 
 func _disparar():
 	if not escena_proyectil:
@@ -84,9 +80,9 @@ func _disparar():
 	# instancia el proyectil
 	var proj = escena_proyectil.instance()
 	# distancia desde el centro del tanque hasta la punta (ajustá si hace falta)
-	var spawn_distance = mitad_ancho + 6
+	#var spawn_distance = mitad_ancho + 6
 	# posición en la punta según la rotación actual
-	proj.position = position + Vector2(cos(rotation), sin(rotation)) * spawn_distance
+	#proj.position = position + Vector2(cos(rotation), sin(rotation)) * spawn_distance
 	# pasar rotación y dirección (opcional)
 	proj.rotation = rotation
 	# el script del proyectil usa 'direccion' como variable pública
