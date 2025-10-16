@@ -32,16 +32,6 @@ custom_fonts/font = SubResource( 1 )
 text = "Jugar"
 
 [node name="creditos" type="Button" parent="."]
-margin_left = 417.0
-margin_top = 512.0
-margin_right = 579.0
-margin_bottom = 548.0
-custom_colors/font_color = Color( 0.87451, 0.447059, 0.0941176, 1 )
-custom_colors/font_color_hover = Color( 0.027451, 0.211765, 0.25098, 1 )
-custom_fonts/font = SubResource( 1 )
-text = "Salir"
-
-[node name="salir" type="Button" parent="."]
 margin_left = 370.0
 margin_top = 426.0
 margin_right = 622.0
@@ -50,6 +40,16 @@ custom_colors/font_color = Color( 0.87451, 0.447059, 0.0941176, 1 )
 custom_colors/font_color_hover = Color( 0.027451, 0.211765, 0.25098, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Créditos"
+
+[node name="salir" type="Button" parent="."]
+margin_left = 417.0
+margin_top = 512.0
+margin_right = 579.0
+margin_bottom = 548.0
+custom_colors/font_color = Color( 0.87451, 0.447059, 0.0941176, 1 )
+custom_colors/font_color_hover = Color( 0.027451, 0.211765, 0.25098, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Salir"
 
 [connection signal="pressed" from="jugar" to="." method="_on_jugar_pressed"]
 [connection signal="pressed" from="salir" to="." method="_on_salir_pressed"]
