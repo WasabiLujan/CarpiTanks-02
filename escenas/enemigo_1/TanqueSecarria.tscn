@@ -8,6 +8,7 @@ radius = 15.0
 height = 4.0
 
 [node name="TanqueSecarria" type="KinematicBody2D"]
+pause_mode = 1
 position = Vector2( 38, 15 )
 collision_layer = 2
 script = ExtResource( 2 )
