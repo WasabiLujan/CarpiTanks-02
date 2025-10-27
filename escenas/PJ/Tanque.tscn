@@ -1,15 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://escenas/PJ/Tanque.gd" type="Script" id=1]
 [ext_resource path="res://asset/PJ/64x64.png" type="Texture" id=2]
-[ext_resource path="res://escenas/PJ/Projectile.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 31.5, 32 )
 
 [node name="Tanque" type="KinematicBody2D"]
 script = ExtResource( 1 )
-escena_proyectil = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 rotation = 1.5708
