@@ -16,12 +16,11 @@ func _physics_process(delta):
 	movimiento = move_and_slide(movimiento)
 
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del jugador, falta ajustar direccion del sprite
 	if body != self:
 		jugador = body
-	pass # Replace with function body.
 
 
 func _on_Area2D_body_exited(body):
 	jugador = null
-	pass # Replace with function body.
+
