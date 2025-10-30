@@ -9,12 +9,8 @@ radius = 29.0689
 [sub_resource type="CircleShape2D" id=2]
 radius = 935.862
 
-<<<<<<< Updated upstream
 [node name="Node2D2" type="KinematicBody2D"]
 pause_mode = 1
-=======
-[node name="Node2D" type="KinematicBody2D"]
->>>>>>> Stashed changes
 collision_layer = 8
 collision_mask = 13
 script = ExtResource( 2 )
