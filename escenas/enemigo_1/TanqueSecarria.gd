@@ -88,12 +88,12 @@ func _on_Area2D_body_entered(body):
 		movimiento = obtener_dierccion_random()
 		rotar()
 	pass # Replace with function body.
-
-#Nope
-
+"""
+#Nope este
+""""
 var jugador = null
 
-var movimiento = Vector2.ZERO
+movimiento = Vector2.ZERO
 var velocidad = 200
 
 func _physics_process(delta):
@@ -115,40 +115,23 @@ func _on_Area2D_body_entered(body):
 func _on_Area2D_body_exited(body):
 	jugador = null
 	pass # Replace with function body.
+
 """
 
-const MAX_SPEED : float = 100.0
+var velocidad = 25
+var seguir_al_jugador = false
+var jugador = null
 
-var motion := Vector2()
+func _physics_process(delta):
+	if seguir_al_jugador:
+		position += (jugador.position + position)/velocidad
+		#agregar animaciones despues
 
-func _ready():
-	$NPC.scale.x = -1
-	motion.x = MAX_SPEED
 
-func _next_to_left_wall() -> bool:
-	return $Izquierda.is_colliding()
+func _on_Area_deteccion_enemigo_body_entered(body):
+	jugador = body
+	seguir_al_jugador = true
 
-func _next_to_rigth_wall() -> bool:
-	return $Derecha.is_colliding()
-
-func _next_to_up_wall() -> bool:
-	return $Arriba.is_colliding()
-
-func _next_to_down_wall() -> bool:
-	return $Abajo.is_colliding()
-
-#func _floor_detection() (?
-
-func _girar():
-	if _next_to_rigth_wall() or _next_to_left_wall():
-		motion.x *= -1
-		$NPC.scale.x *= -1 
-	if _next_to_up_wall() or _next_to_down_wall():
-		motion.y *= -1
-		$NPC.scale.y *= -1 
-
-func _process(delta):
-	_girar()
-	
-	motion = move_and_slide(motion)
-	pass
+func _on_Area_deteccion_enemigo_body_exited(body):
+	jugador = null
+	seguir_al_jugador = false
