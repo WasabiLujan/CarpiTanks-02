@@ -179,3 +179,33 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Godot 3 specific ignores
+.import/
+.mono/
+.vscode/ # If using VS Code
+export/
+build/
+*.pck
+*.zip
+*.translation
+*.tscn.converted
+*.gdns
+*.tres.converted
+*.gdnlib
+*.gdc
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor specific files
+# If you have specific editor settings you don't want to commit, add them here.
+# For example, if you use a specific IDE that creates project files.
+# .idea/ (for IntelliJ/Rider)
+# .vs/ (for Visual Studio)
+
+# User-specific settings (if not already covered by .import/)
+# Some user-specific settings might be saved in the project folder,
+# but usually, the .import/ folder covers most of these.
