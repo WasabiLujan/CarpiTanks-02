@@ -57,8 +57,3 @@ position = Vector2( 2399, 2136 )
 
 [node name="Enemigo 4" parent="." instance=ExtResource( 4 )]
 position = Vector2( 2122, 796 )
-
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1739, 1319 )
-scale = Vector2( 83.4063, 90.9583 )
-texture = ExtResource( 1 )
