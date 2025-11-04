@@ -26,8 +26,8 @@ func movimiento():
 		movimiento.y = velocidad
 		rotation_degrees = 90
 	if Input.is_action_pressed("ui_right"):
-		movimiento.x = velocidad
-		rotation_degrees = 0
+		movimiento.x = velocidad #VER PORQUE FALLA ACA AVECES
+		#rotation_degrees = 0 ver bien
 	if Input.is_action_pressed("ui_left"):
 		movimiento.x = -velocidad
 		rotation_degrees = 180
