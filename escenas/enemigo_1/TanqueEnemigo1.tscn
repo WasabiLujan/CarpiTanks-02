@@ -13,20 +13,27 @@ radius = 935.862
 radius = 316.394
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 122.066
+radius = 93.4345
 
 [node name="Node2D2" type="KinematicBody2D"]
 pause_mode = 1
 collision_layer = 8
 collision_mask = 13
 script = ExtResource( 2 )
-
-[node name="PosicionDelDisparo" type="Node2D" parent="."]
-position = Vector2( 0, -29 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
+
+[node name="PosicionDelDisparo" type="Node2D" parent="Sprite"]
+position = Vector2( 0, -18.5 )
+scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -56,4 +63,5 @@ shape = SubResource( 4 )
 [connection signal="body_entered" from="Area de comenzar a disparar" to="." method="_on_Area_de_comenzar_a_disparar_body_entered"]
 [connection signal="body_exited" from="Area de comenzar a disparar" to="." method="_on_Area_de_comenzar_a_disparar_body_exited"]
 [connection signal="body_entered" from="Area de detenerce" to="." method="_on_Area_de_detenerce_body_entered"]
+[connection signal="body_exited" from="Area de detenerce" to="." method="_on_Area_de_detenerce_body_exited"]
 [connection signal="timeout" from="tiempo_prev_al_disparo" to="." method="_on_tiempo_prev_al_disparo_timeout"]

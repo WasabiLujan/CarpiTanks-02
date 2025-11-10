@@ -7,11 +7,12 @@ var jugador = null
 var movimiento = Vector2.ZERO
 var velocidad = 100
 
+var detener_mov = false
 
 func _physics_process(delta):
 	movimiento = Vector2.ZERO
 	
-	if jugador != null:
+	if jugador != null and not detener_mov:
 		movimiento = position.direction_to(jugador.position)
 	else:
 		movimiento = Vector2.ZERO
@@ -54,11 +55,19 @@ func _on_tiempo_prev_al_disparo_timeout():
 
 func disparar():
 	var proyectil = proyectil_enemigo.instance()
-	proyectil.position = $PosicionDelDisparo.global_position
+	proyectil.position = $Sprite/PosicionDelDisparo.global_position
 	proyectil.rotation = $Sprite.rotation
 	
 	get_parent().add_child(proyectil)
 
 
 func _on_Area_de_detenerce_body_entered(body):
-	pass # Replace with function body.
+	if body.is_in_group("Jugador"):
+		detener_mov = true
+		jugador = body
+		movimiento = Vector2.ZERO
+
+func _on_Area_de_detenerce_body_exited(body):
+	if body.is_in_group("Jugador"):
+		detener_mov = false
+
