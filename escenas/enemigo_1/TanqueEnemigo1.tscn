@@ -10,7 +10,7 @@ radius = 29.0689
 radius = 935.862
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 219.002
+radius = 316.394
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 122.066
@@ -45,16 +45,15 @@ position = Vector2( 0, 1 )
 shape = SubResource( 3 )
 
 [node name="Area de detenerce" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area de detenerce"]
 shape = SubResource( 4 )
 
-[node name="tiempo_prev_al_disparo" type="Timer" parent="."]
-wait_time = 3.0
+[node name="tiempo_prev_al_disparo" type="Timer" parent="." groups=["Enemigo"]]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
 [connection signal="body_entered" from="Area de comenzar a disparar" to="." method="_on_Area_de_comenzar_a_disparar_body_entered"]
 [connection signal="body_exited" from="Area de comenzar a disparar" to="." method="_on_Area_de_comenzar_a_disparar_body_exited"]
+[connection signal="body_entered" from="Area de detenerce" to="." method="_on_Area_de_detenerce_body_entered"]
 [connection signal="timeout" from="tiempo_prev_al_disparo" to="." method="_on_tiempo_prev_al_disparo_timeout"]

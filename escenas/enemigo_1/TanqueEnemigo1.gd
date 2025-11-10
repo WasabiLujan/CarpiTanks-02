@@ -36,7 +36,7 @@ func _on_Area2D_body_exited(body):
 	jugador = null
 
 func _on_Area_de_comenzar_a_disparar_body_entered(body):
-	if body.is_in_group("Tanque"): #Falta crear un grupo de jugadores
+	if body.is_in_group("Jugador"): #Falta crear un grupo de jugadores
 		jugador = body
 		$tiempo_prev_al_disparo.start()
 
@@ -60,8 +60,5 @@ func disparar():
 	get_parent().add_child(proyectil)
 
 
-""""
-	var proyectil = proyectil_enemigo.instance() #quizas deba renombrar la var de aca
-	proyectil.position = self.position
-	get_parent().add_child(proyectil)
-"""
+func _on_Area_de_detenerce_body_entered(body):
+	pass # Replace with function body.
