@@ -26,7 +26,7 @@ func movimiento():
 		movimiento.y = velocidad
 		rotation_degrees = 90
 	if Input.is_action_pressed("ui_right"):
-		movimiento.x = velocidad #VER PORQUE FALLA ACA AVECES
+		movimiento.x = velocidad #VER PORQUE FALLA ACA AVECES al arrancar el juego
 		#rotation_degrees = 0 ver bien
 	if Input.is_action_pressed("ui_left"):
 		movimiento.x = -velocidad
