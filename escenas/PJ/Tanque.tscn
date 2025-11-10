@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[node name="Tanque" type="KinematicBody2D"]
+[node name="Tanque" type="KinematicBody2D" groups=["Jugador"]]
 pause_mode = 1
 collision_layer = 2
 collision_mask = 9
