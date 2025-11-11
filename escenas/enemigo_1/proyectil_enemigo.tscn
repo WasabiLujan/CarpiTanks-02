@@ -13,7 +13,8 @@ height = 64.0628
 radius = 14.5554
 height = 72.9054
 
-[node name="Proyectil Enemigo" type="KinematicBody2D"]
+[node name="Proyectil Enemigo" type="KinematicBody2D" groups=["ProyectilEnemigo"]]
+scale = Vector2( 0.5, 0.5 )
 collision_layer = 0
 collision_mask = 3
 script = ExtResource( 2 )
