@@ -7,7 +7,7 @@ func _ready():
 	set_pause_mode(Node.PAUSE_MODE_PROCESS)
 	pass
 
-#Función para pausr el juego
+#Función para pausar el juego
 func _process(delta):
 	if Input.is_action_just_pressed("pause"):
 		get_tree().paused = !get_tree().paused
