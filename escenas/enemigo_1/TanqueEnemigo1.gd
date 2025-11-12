@@ -5,7 +5,7 @@ const proyectil_enemigo = preload("res://escenas/enemigo_1/proyectil_enemigo.tsc
 var jugador = null
 
 var movimiento = Vector2.ZERO
-var velocidad = 100
+var velocidad = 80
 
 var detener_mov = false
 
