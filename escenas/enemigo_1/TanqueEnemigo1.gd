@@ -5,13 +5,14 @@ const proyectil_enemigo = preload("res://escenas/enemigo_1/proyectil_enemigo.tsc
 var jugador = null
 
 var movimiento = Vector2.ZERO
-var velocidad = 100
+var velocidad = 80
 
+var detener_mov = false
 
 func _physics_process(delta):
 	movimiento = Vector2.ZERO
 	
-	if jugador != null:
+	if jugador != null and not detener_mov:
 		movimiento = position.direction_to(jugador.position)
 	else:
 		movimiento = Vector2.ZERO
@@ -31,12 +32,13 @@ func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del juga
 	if body != self:
 		jugador = body
 
-
 func _on_Area2D_body_exited(body):
 	jugador = null
 
+
+
 func _on_Area_de_comenzar_a_disparar_body_entered(body):
-	if body.is_in_group("Tanque"): #Falta crear un grupo de jugadores
+	if body.is_in_group("Jugador"):
 		jugador = body
 		$tiempo_prev_al_disparo.start()
 
@@ -54,14 +56,20 @@ func _on_tiempo_prev_al_disparo_timeout():
 
 func disparar():
 	var proyectil = proyectil_enemigo.instance()
-	proyectil.position = $PosicionDelDisparo.global_position
+	proyectil.position = $Sprite/PosicionDelDisparo.global_position
 	proyectil.rotation = $Sprite.rotation
 	
 	get_parent().add_child(proyectil)
 
 
-""""
-	var proyectil = proyectil_enemigo.instance() #quizas deba renombrar la var de aca
-	proyectil.position = self.position
-	get_parent().add_child(proyectil)
-"""
+
+func _on_Area_de_detenerce_body_entered(body):
+	if body.is_in_group("Jugador"):
+		detener_mov = true
+		jugador = body
+		movimiento = Vector2.ZERO
+
+func _on_Area_de_detenerce_body_exited(body):
+	if body.is_in_group("Jugador"):
+		detener_mov = false
+
