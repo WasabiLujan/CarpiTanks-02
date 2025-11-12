@@ -32,12 +32,13 @@ func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del juga
 	if body != self:
 		jugador = body
 
-
 func _on_Area2D_body_exited(body):
 	jugador = null
 
+
+
 func _on_Area_de_comenzar_a_disparar_body_entered(body):
-	if body.is_in_group("Jugador"): #Falta crear un grupo de jugadores
+	if body.is_in_group("Jugador"):
 		jugador = body
 		$tiempo_prev_al_disparo.start()
 
@@ -59,6 +60,7 @@ func disparar():
 	proyectil.rotation = $Sprite.rotation
 	
 	get_parent().add_child(proyectil)
+
 
 
 func _on_Area_de_detenerce_body_entered(body):
