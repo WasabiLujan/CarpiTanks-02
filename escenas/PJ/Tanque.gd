@@ -2,21 +2,26 @@ extends KinematicBody2D
 
 export var velocidad := 200
 var vel_vec := Vector2.ZERO
-#const proyectil_objeto = preload("res://escenas/PJ/Projectile.tscn")
+var ultima_direccion_valida = Vector2.ZERO # Define una dirección inicial
+
+#variables para el disparo
+var movimiento = Vector2.ZERO
+const proyectil_objeto = preload("res://escenas/PJ/Projectile.tscn")
 
 #varibles para el nitro 
 export var nitro_multiplier := 2.0        # multiplica la velocidad
-export var nitro_duracion := 1.5          # segundos que dura el nitro
+export var nitro_duracion := 0.75          # segundos que dura el nitro
 export var nitro_cooldown := 3.0          # segundos hasta que se pueda usar otra vez
 var nitro_activo := false
 var nitro_tiempo_restante := 0.0
 var nitro_cooldown_restante := 0.0
 
-#func _process(delta):
-#	if Input.is_action_just_pressed("shoot"):
-#		var proyectil = proyectil_objeto.instance()
-#		proyectil.global_position = global_position
-#		get_parent().add_child(proyectil)
+func _ready():
+	ultima_direccion_valida = Vector2.LEFT
+
+func _process(delta):
+	if Input.is_action_just_pressed("shoot"):
+		_disparar()
 
 func _physics_process(delta):
 	# Actualiza timer del nitro
@@ -32,7 +37,7 @@ func _physics_process(delta):
 		if nitro_activo:
 			velocidad_actual *= nitro_multiplier
 		vel_vec = vel_vec.normalized() * velocidad_actual
-
+		ultima_direccion_valida = vel_vec.normalized()
 		_actualizar_animacion_por_direccion(vel_vec)
 	else:
 		if $AnimationPlayer:
@@ -101,6 +106,35 @@ func _actualizar_animacion_por_direccion(vel: Vector2):
 		else:
 			$AnimationPlayer.play("abajo")
 			
+#funcion para disparar
+func _disparar():
+	var proyectil = proyectil_objeto.instance()
+
+	# Dirección a disparar 
+	var direccion = ultima_direccion_valida
+	if direccion == Vector2.ZERO:
+		direccion = Vector2.UP
+	direccion = direccion.normalized()
+
+	# Offset para que salga delante del tanque
+	var offset_dist = 50  # ajusta la distancia desde donde sale el proyectil
+	var offset_global = direccion * offset_dist
+	proyectil.global_position = $Sprite/posicionDisparo.global_position + offset_global
+
+	# Ajuste de rotación visual 
+	proyectil.rotation = direccion.angle()
+
+	get_parent().add_child(proyectil)
+
+	# Evita colisionar con el tanque que lo dispara
+	if proyectil.has_method("add_collision_exception_with"):
+		proyectil.add_collision_exception_with(self)
+
+	# Se pasa la dirección
+	if proyectil.has_method("set_direccion"):
+		proyectil.set_direccion(direccion)
+	else:
+		print("El proyectil no tiene set_direccion()")
 
 
 
