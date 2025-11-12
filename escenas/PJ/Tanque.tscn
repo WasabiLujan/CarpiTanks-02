@@ -162,6 +162,8 @@ scale = Vector2( 0.232548, 0.205902 )
 texture = ExtResource( 2 )
 hframes = 8
 
+[node name="posicionDisparo" type="Node2D" parent="Sprite"]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.5, -3.5 )
 shape = SubResource( 1 )
