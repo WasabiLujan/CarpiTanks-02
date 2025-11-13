@@ -22,7 +22,8 @@ func _physics_process(delta):
 		queue_free()
 
 
-
-
-
-
+func _on_zona_colicion_body_entered(body): #Con esta area detecta y resta las vidas con cada disparo
+	if body.is_in_group("enemigo"):
+		body.recibir_dano()
+		queue_free()
+	pass # Replace with function body.
