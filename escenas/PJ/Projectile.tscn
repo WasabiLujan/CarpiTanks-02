@@ -7,7 +7,7 @@
 extents = Vector2( 12.3853, 3.70786 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 25.8309, 9.23588 )
+extents = Vector2( 28.6085, 10.6648 )
 
 [node name="Projectile" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -28,9 +28,11 @@ wait_time = 5.0
 autostart = true
 
 [node name="zona_colicion" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="zona_colicion"]
-position = Vector2( 0.939529, -4.10379 )
+position = Vector2( 2.56352, -1.43552 )
 rotation = -1.64241
 scale = Vector2( 1, 1 )
 shape = SubResource( 2 )
