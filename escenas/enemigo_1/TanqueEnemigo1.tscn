@@ -15,7 +15,7 @@ radius = 316.394
 [sub_resource type="CircleShape2D" id=4]
 radius = 93.4345
 
-[node name="Node2D2" type="KinematicBody2D"]
+[node name="Node2D2" type="KinematicBody2D" groups=["enemigo"]]
 pause_mode = 1
 collision_layer = 8
 collision_mask = 13
@@ -57,6 +57,7 @@ shape = SubResource( 3 )
 shape = SubResource( 4 )
 
 [node name="tiempo_prev_al_disparo" type="Timer" parent="." groups=["Enemigo"]]
+wait_time = 2.5
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

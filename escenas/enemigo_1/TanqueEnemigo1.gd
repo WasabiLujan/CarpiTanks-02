@@ -7,6 +7,8 @@ var jugador = null
 var movimiento = Vector2.ZERO
 var velocidad = 80
 
+var vidas_del_enemigo1 = 3
+
 var detener_mov = false
 
 func _physics_process(delta):
@@ -27,6 +29,13 @@ func _physics_process(delta):
 		$Sprite.rotation = angulo
 		
 	move_and_slide(movimiento)
+
+func recibir_dano():
+	vidas_del_enemigo1 -= 1
+	print("Vidas restantes DEL ENEMIGO: ", vidas_del_enemigo1)
+	if vidas_del_enemigo1 <= 0:
+		queue_free()
+
 
 func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del jugador, falta ajustar direccion del sprite
 	if body != self:
