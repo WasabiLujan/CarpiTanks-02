@@ -4,6 +4,9 @@ export var velocidad := 200
 var vel_vec := Vector2.ZERO
 var ultima_direccion_valida = Vector2.ZERO # Define una dirección inicial
 
+#Variable de la vida
+var vidas_del_p = 5
+
 #variables para el disparo
 var movimiento = Vector2.ZERO
 const proyectil_objeto = preload("res://escenas/PJ/Projectile.tscn")
@@ -11,7 +14,7 @@ const proyectil_objeto = preload("res://escenas/PJ/Projectile.tscn")
 #varibles para el nitro 
 export var nitro_multiplier := 2.0        # multiplica la velocidad
 export var nitro_duracion := 0.75          # segundos que dura el nitro
-export var nitro_cooldown := 3.0          # segundos hasta que se pueda usar otra vez
+export var nitro_cooldown := 2.0          # segundos hasta que se pueda usar otra vez
 var nitro_activo := false
 var nitro_tiempo_restante := 0.0
 var nitro_cooldown_restante := 0.0
@@ -44,6 +47,13 @@ func _physics_process(delta):
 			$AnimationPlayer.stop()
 
 	move_and_slide(vel_vec)
+
+func recibir_dano(): #Codigo para morir
+	vidas_del_p -= 1
+	print("Vidas restantes: ", vidas_del_p)
+	if vidas_del_p <= 0:
+		queue_free()
+
 
 func _manejar_input():
 	if Input.is_action_pressed("ui_up"):

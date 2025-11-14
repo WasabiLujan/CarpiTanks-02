@@ -7,10 +7,8 @@ var jugador = null
 var movimiento = Vector2.ZERO
 var velocidad = 80
 
-var vidas_del_enemigo1 = 3
+var vidas_del_enemigo1 = 4
 
-var seguir_jugador = false
-var comenzar_a_disparar = false
 var detener_mov = false
 
 func _physics_process(delta):
@@ -42,33 +40,25 @@ func recibir_dano():
 
 
 func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del jugador, falta ajustar direccion del sprite
-	if body.is_in_group("Jugador"):
-		seguir_jugador = true
+	if body != self:
 		jugador = body
 
 func _on_Area2D_body_exited(body):
-	if body.is_in_group("Jugador"):
-		seguir_jugador = false
-		_verificar_salida()
-	#jugador = null
+	jugador = null
 
 
 
 func _on_Area_de_comenzar_a_disparar_body_entered(body):
 	if body.is_in_group("Jugador"):
-		comenzar_a_disparar = true
 		jugador = body
 		$tiempo_prev_al_disparo.start()
 
 
 func _on_Area_de_comenzar_a_disparar_body_exited(body):
-	if body.is_in_group("Jugador"):
-		comenzar_a_disparar = false
+	if body == jugador:
 		jugador = null
 		#Detener el disparo
 		$tiempo_prev_al_disparo.stop()
-		_verificar_salida()
-
 
 
 func _on_tiempo_prev_al_disparo_timeout():
@@ -88,15 +78,11 @@ func _on_Area_de_detenerce_body_entered(body):
 	if body.is_in_group("Jugador"):
 		detener_mov = true
 		jugador = body
-		#movimiento = Vector2.ZERO
+		movimiento = Vector2.ZERO
+		#$Sprite.get_angle_to(jugador.position)# Gepeto, presta atenciona aca, hice este codigo para que sin moverse de la poscion en la que se encuentre en enemigo, rote hacia el angulo donde se mueva el jugador, pero no me esta saliendo
+
 
 func _on_Area_de_detenerce_body_exited(body):
 	if body.is_in_group("Jugador"):
 		detener_mov = false
-		_verificar_salida()
-
-
-func _verificar_salida():
-	if not detener_mov and not seguir_jugador and not comenzar_a_disparar:
-		jugador = null
 

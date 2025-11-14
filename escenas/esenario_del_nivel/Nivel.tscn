@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://asset/elementos_nvl/piedra.png" type="Texture" id=1]
 [ext_resource path="res://escenas/PJ/Tanque.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://asset/elementos_nvl/Lago 2.png" type="Texture" id=7]
 [ext_resource path="res://asset/elementos_nvl/Lago 1.png" type="Texture" id=8]
 [ext_resource path="res://asset/elementos_nvl/fondos achicados/100 pociento.png" type="Texture" id=9]
+[ext_resource path="res://escenas/enemigo_1/TanqueEnemigo2.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 31, 0, 31, 30, 0, 30 )
@@ -84,11 +85,11 @@ position = Vector2( 714, 350 )
 [node name="Enemigo 1" parent="." instance=ExtResource( 4 )]
 position = Vector2( 610, 1068 )
 
-[node name="Enemigo 2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 918, 2217 )
+[node name="TanqueEnemigo1" parent="." instance=ExtResource( 10 )]
+position = Vector2( 696, 2310 )
 
-[node name="Enemigo 3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2399, 2136 )
+[node name="TanqueEnemigo2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 2359, 2213 )
 
 [node name="Enemigo 4" parent="." instance=ExtResource( 4 )]
 position = Vector2( 2122, 796 )
