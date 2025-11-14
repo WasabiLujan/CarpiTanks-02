@@ -19,11 +19,7 @@ func _physics_process(delta):
 	var displacement = motion * velocity * delta
 	var collision = move_and_collide(displacement)
 	if collision:
+		var body = collision.collider
+		if body.is_in_group("enemigo"):
+			body.recibir_dano()
 		queue_free()
-
-
-func _on_zona_colicion_body_entered(body): #Con esta area detecta y resta las vidas con cada disparo
-	if body.is_in_group("enemigo"):
-		body.recibir_dano()
-		queue_free()
-	pass # Replace with function body.

@@ -14,7 +14,7 @@ const proyectil_objeto = preload("res://escenas/PJ/Projectile.tscn")
 #varibles para el nitro 
 export var nitro_multiplier := 2.0        # multiplica la velocidad
 export var nitro_duracion := 0.75          # segundos que dura el nitro
-export var nitro_cooldown := 3.0          # segundos hasta que se pueda usar otra vez
+export var nitro_cooldown := 2.0          # segundos hasta que se pueda usar otra vez
 var nitro_activo := false
 var nitro_tiempo_restante := 0.0
 var nitro_cooldown_restante := 0.0
