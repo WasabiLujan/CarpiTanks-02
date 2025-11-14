@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lago2.png-a93c76cc0f0bcfa8e0f32ce9c6cb04b3.stex"
+path="res://.import/dodo enojau-Sheet.png-b34c27b307bb7a1ce1605deb5b0a6d63.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/elementos_nvl/lago2.png"
-dest_files=[ "res://.import/lago2.png-a93c76cc0f0bcfa8e0f32ce9c6cb04b3.stex" ]
+source_file="res://asset/aliados/dodo enojau-Sheet.png"
+dest_files=[ "res://.import/dodo enojau-Sheet.png-b34c27b307bb7a1ce1605deb5b0a6d63.stex" ]
 
 [params]
 
