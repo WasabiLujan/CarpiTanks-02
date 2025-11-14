@@ -1,26 +1,25 @@
 extends KinematicBody2D
 
-var movimiento = Vector2.ZERO
-
-var velocidad = 300
-var angulo = 0
+export var velocity := 700
+var motion := Vector2.ZERO
+const ROTATION_CORRECTION := PI/2  
 
 func _ready():
-	angulo = get_angle_to(get_global_mouse_position())
-	
-	movimiento.x = cos(angulo)
-	movimiento.y = sin(angulo)
+	pass
+
+func set_direccion(dir: Vector2):
+	motion = dir.normalized()
+	rotation = motion.angle() + ROTATION_CORRECTION
 
 func _physics_process(delta):
-	
-	movimiento = movimiento.normalized() * velocidad
-	
-	movimiento = move_and_slide(movimiento)
-	#aca quede
+	if motion == Vector2.ZERO:
+		return
 
-func _on_Timer_timeout():
-	self.queue_free()
-
-
-func _on_zona_colicion_body_entered(body):
-	self.queue_free()
+	# desplazamiento para este frame (move_and_collide espera un desplazamiento en px para este frame)
+	var displacement = motion * velocity * delta
+	var collision = move_and_collide(displacement)
+	if collision:
+		var body = collision.collider
+		if body.is_in_group("enemigo"):
+			body.recibir_dano()
+		queue_free()
