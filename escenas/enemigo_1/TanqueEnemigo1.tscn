@@ -4,13 +4,13 @@
 [ext_resource path="res://escenas/enemigo_1/TanqueEnemigo1.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 39.2173
+radius = 26.1725
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 935.862
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 541.799
+radius = 335.215
 
 [sub_resource type="CircleShape2D" id=4]
 radius = 93.4345
@@ -24,7 +24,7 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 5.96046e-08, -5.68434e-14 )
 rotation = 0.0426147
-scale = Vector2( 2, 2 )
+scale = Vector2( 1.8, 1.8 )
 texture = ExtResource( 1 )
 
 [node name="PosicionDelDisparo" type="Node2D" parent="Sprite"]

@@ -7,7 +7,7 @@ var jugador = null
 var movimiento = Vector2.ZERO
 var velocidad = 80
 
-var vidas_del_enemigo1 = 4
+var vidas_del_enemigo1 = 2
 
 var seguir_jugador = false
 var comenzar_a_disparar = false
