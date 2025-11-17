@@ -53,6 +53,8 @@ func recibir_dano(): #Codigo para morir
 	print("Vidas restantes: ", vidas_del_p)
 	if vidas_del_p <= 0:
 		queue_free()
+		var game_over = load("res://escenas/UI/game_over.tscn").instance()
+		get_parent().add_child(game_over)
 
 
 func _manejar_input():
