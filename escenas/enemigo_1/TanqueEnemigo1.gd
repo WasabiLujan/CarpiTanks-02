@@ -3,6 +3,7 @@ extends KinematicBody2D
 const proyectil_enemigo = preload("res://escenas/enemigo_1/proyectil_enemigo.tscn")
 
 var jugador = null
+
 var movimiento = Vector2.ZERO
 var velocidad = 80
 
@@ -55,7 +56,10 @@ func recibir_dano():
 	print("Vidas restantes DEL ENEMIGO: ", vidas_del_enemigo1)
 	if vidas_del_enemigo1 <= 0:
 		vidas_del_enemigo1 = 3
+		get_tree().call_group("Nivel", "enemigo_muerto")
 		queue_free()
+
+
 
 func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del jugador, falta ajustar direccion del sprite
 	if body.is_in_group("Jugador"):
@@ -90,8 +94,6 @@ func _on_Area_de_comenzar_a_disparar_body_exited(body):
 func _on_tiempo_prev_al_disparo_timeout():
 	if jugador != null: #De esta forma refornzamos que solo suceda si hay un jugador
 		disparar()
-
-
 
 func disparar():
 	var proyectil = proyectil_enemigo.instance()
