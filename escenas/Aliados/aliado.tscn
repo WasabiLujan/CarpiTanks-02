@@ -176,6 +176,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeActivacion"]
+position = Vector2( -2.29185, -4.85434 )
 shape = SubResource( 4 )
 
 [node name="AreaParaDetenerce" type="Area2D" parent="."]
@@ -197,6 +198,44 @@ anims/diagonal_izq_abajo = SubResource( 12 )
 anims/diagonal_izq_arriba = SubResource( 13 )
 anims/izquierda = SubResource( 14 )
 
+[node name="RayCastLeft" type="RayCast2D" parent="."]
+position = Vector2( 0, 4.85449 )
+enabled = true
+cast_to = Vector2( -553.648, -0.000123024 )
+collision_mask = 9
+
+[node name="RayCastUp" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -606.796 )
+collision_mask = 9
+
+[node name="RayCastRigth" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 596.567, 4.85437 )
+collision_mask = 9
+
+[node name="RayCastDown" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 611.651 )
+collision_mask = 9
+
+[node name="RayCastDownLeft" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( -394.85, 373.786 )
+collision_mask = 9
+
+[node name="RayCastDownRight" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 369.099, 373.786 )
+collision_mask = 9
+
+[node name="RayCastUpRight" type="RayCast2D" parent="."]
+cast_to = Vector2( 381.974, -383.495 )
+
+[node name="RayCastUpLeft" type="RayCast2D" parent="."]
+cast_to = Vector2( -381.974, -383.495 )
+
 [connection signal="body_entered" from="AreaDeActivacion" to="." method="_on_AreaDeActivacion_body_entered"]
+[connection signal="body_exited" from="AreaDeActivacion" to="." method="_on_AreaDeActivacion_body_exited"]
 [connection signal="body_entered" from="AreaParaDetenerce" to="." method="_on_AreaParaDetenerce_body_entered"]
 [connection signal="body_exited" from="AreaParaDetenerce" to="." method="_on_AreaParaDetenerce_body_exited"]
