@@ -26,7 +26,10 @@ func _on_AreaDeActivacion_body_entered(body):
 	if body.is_in_group("Jugador"):
 		jugador = body
 		jugador_cerca = true
-		
+		get_tree().call_group("Nivel", "aliado_rescatado_func")
+		#Mensaje cuando se rescata al aliado
+		var mensaje = load("res://escenas/UI/mensaje_aliado.tscn").instance()
+		get_parent().add_child(mensaje)
 
 
 func _on_AreaParaDetenerce_body_entered(body):
@@ -34,8 +37,6 @@ func _on_AreaParaDetenerce_body_entered(body):
 		detenerce = true
 		jugador = body
 		motion = Vector2.ZERO
-
-
 
 
 func _on_AreaParaDetenerce_body_exited(body):
