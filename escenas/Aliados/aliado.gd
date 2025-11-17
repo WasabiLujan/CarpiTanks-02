@@ -7,6 +7,7 @@ var jugador_cerca = false
 var jugador = null
 var detenerse = false
 
+const canvas_layer = preload("res://escenas/HUD/HUD.tscn")
 #var colicionar_con_mundo = false
 
 func _ready():
@@ -102,6 +103,10 @@ func _on_AreaDeActivacion_body_entered(body):
 	if body.is_in_group("Jugador"):
 		jugador = body
 		jugador_cerca = true
+		
+		var notificar_salvacion = canvas_layer.instance()
+		add_child(notificar_salvacion)
+		notificar_salvacion.save(jugador_cerca)
 	
 
 func _on_AreaDeActivacion_body_exited(body):

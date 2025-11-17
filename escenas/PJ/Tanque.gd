@@ -10,6 +10,7 @@ var vidas_del_p = 5
 #variables para el disparo
 var movimiento = Vector2.ZERO
 const proyectil_objeto = preload("res://escenas/PJ/Projectile.tscn")
+const canvas_layer = preload("res://escenas/HUD/HUD.tscn")
 
 #varibles para el nitro 
 export var nitro_multiplier := 2.0        # multiplica la velocidad
@@ -49,7 +50,14 @@ func _physics_process(delta):
 	move_and_slide(vel_vec)
 
 func recibir_dano(): #Codigo para morir
+	
+	var quitar_vidas = canvas_layer.instance()
+	add_child(quitar_vidas)
+	
 	vidas_del_p -= 1
+	
+	quitar_vidas.lives_out(vidas_del_p)
+	
 	print("Vidas restantes: ", vidas_del_p)
 	if vidas_del_p <= 0:
 		queue_free()
