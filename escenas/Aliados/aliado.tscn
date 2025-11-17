@@ -156,7 +156,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[node name="Aliado" type="KinematicBody2D"]
+[node name="Aliado" type="KinematicBody2D" groups=["aliado"]]
 scale = Vector2( 0.233, 0.206 )
 collision_layer = 32
 collision_mask = 3
