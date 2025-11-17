@@ -19,7 +19,7 @@ script = ExtResource( 3 )
 margin_right = 1028.0
 margin_bottom = 606.0
 texture = ExtResource( 1 )
-stretch_mode = 1
+expand = true
 
 [node name="jugar" type="Button" parent="."]
 margin_left = 418.0
@@ -52,4 +52,5 @@ custom_fonts/font = SubResource( 1 )
 text = "Salir"
 
 [connection signal="pressed" from="jugar" to="." method="_on_jugar_pressed"]
+[connection signal="pressed" from="creditos" to="." method="_on_creditos_pressed"]
 [connection signal="pressed" from="salir" to="." method="_on_salir_pressed"]

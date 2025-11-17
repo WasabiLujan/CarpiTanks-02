@@ -8,8 +8,8 @@ radius = 23.1639
 height = 13.896
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 21.3099
-height = 21.8275
+radius = 27.1381
+height = 20.4738
 
 [node name="piedra" type="StaticBody2D"]
 script = ExtResource( 2 )

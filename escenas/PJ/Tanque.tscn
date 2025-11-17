@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://escenas/PJ/Tanque.gd" type="Script" id=1]
 [ext_resource path="res://asset/PJ/carpincho enojau-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://escenas/HUD/HUD.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 35.5, 30.5 )
@@ -151,6 +152,7 @@ tracks/0/keys = {
 
 [node name="Tanque" type="KinematicBody2D" groups=["Jugador"]]
 pause_mode = 1
+position = Vector2( 356, 207 )
 collision_layer = 2
 collision_mask = 9
 script = ExtResource( 1 )
@@ -180,13 +182,15 @@ anims/diagonal_izq_arriba = SubResource( 9 )
 anims/izquierda = SubResource( 10 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( -2, 3 )
+position = Vector2( 0, -2 )
 current = true
 zoom = Vector2( 0.7, 0.7 )
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 drag_margin_left = 0.28
 drag_margin_top = 0.23
-drag_margin_right = 0.3
-drag_margin_bottom = 0.18
+drag_margin_right = 0.28
+drag_margin_bottom = 0.23
 editor_draw_drag_margin = true
+
+[node name="HUD (720 x 425)" parent="." instance=ExtResource( 3 )]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/lago2.png-a93c76cc0f0bcfa8e0f32ce9c6cb04b3.stex"
+path="res://.import/LogoCarpiGames.png-ad29e25e518313ff8576702a0d5ea4b9.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/elementos_nvl/lago2.png"
-dest_files=[ "res://.import/lago2.png-a93c76cc0f0bcfa8e0f32ce9c6cb04b3.stex" ]
+source_file="res://Imagenescreditos/LogoCarpiGames.png"
+dest_files=[ "res://.import/LogoCarpiGames.png-ad29e25e518313ff8576702a0d5ea4b9.stex" ]
 
 [params]
 
