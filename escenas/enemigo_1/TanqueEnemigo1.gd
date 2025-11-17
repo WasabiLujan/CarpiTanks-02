@@ -37,8 +37,8 @@ func recibir_dano():
 	print("Vidas restantes DEL ENEMIGO: ", vidas_del_enemigo1)
 	if vidas_del_enemigo1 <= 0:
 		vidas_del_enemigo1 = 3
+		get_tree().call_group("Nivel", "enemigo_muerto")
 		queue_free()
-
 
 
 func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del jugador, falta ajustar direccion del sprite
