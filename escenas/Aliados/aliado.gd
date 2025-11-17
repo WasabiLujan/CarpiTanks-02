@@ -7,12 +7,15 @@ var jugador_cerca = false
 var jugador = null
 var detenerse = false
 
+var colicionar_con_mundo = false
+
 func _physics_process(delta):
 	motion = Vector2.ZERO
 	
 	if jugador_cerca == true and detenerse == false:
 		motion = position.direction_to(jugador.position)
 		movimiento_aliado()
+
 	
 	motion = motion.normalized() * velocity
 	move_and_slide(motion)
@@ -45,7 +48,8 @@ func movimiento_aliado():
 func _on_AreaDeActivacion_body_entered(body):
 	if body.is_in_group("Jugador"):
 		jugador = body
-		jugador_cerca = true		
+		jugador_cerca = true
+		
 
 
 func _on_AreaParaDetenerce_body_entered(body):

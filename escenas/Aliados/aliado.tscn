@@ -158,6 +158,8 @@ tracks/0/keys = {
 
 [node name="Aliado" type="KinematicBody2D"]
 scale = Vector2( 0.233, 0.206 )
+collision_layer = 32
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -170,11 +172,15 @@ shape = SubResource( 3 )
 
 [node name="AreaDeActivacion" type="Area2D" parent="."]
 position = Vector2( -2, 0 )
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDeActivacion"]
 shape = SubResource( 4 )
 
 [node name="AreaParaDetenerce" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaParaDetenerce"]
 position = Vector2( -16, 0 )
