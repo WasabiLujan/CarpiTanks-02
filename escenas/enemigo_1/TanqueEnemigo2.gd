@@ -22,15 +22,34 @@ func _physics_process(delta):
 		movimiento = Vector2.ZERO
 	
 	movimiento = movimiento.normalized() * velocidad
-	
-	#Rotacion del sprite
-	if jugador != null:
-		var direccion = (jugador.position - global_position).normalized()
-		var angulo = direccion.angle() + PI/2 # Ajustá el offset si tu sprite mira hacia arriba 
 		
-		$Sprite.rotation = angulo
-		
+	movimiento_enemigo()
+	movimiento = movimiento.normalized() * velocidad
 	move_and_slide(movimiento)
+	
+	
+func movimiento_enemigo():
+	var x = movimiento.x
+	var y = movimiento.y
+
+	if x > 0.3 and y < -0.3:
+		$AnimationPlayer.play("diagonal_der_arriba")
+	elif x > 0.3 and y > 0.3:
+		$AnimationPlayer.play("diagonal_der_abajo")
+	elif x < -0.3 and y < -0.3:
+		$AnimationPlayer.play("diagonal_izq_arriba")
+	elif x < -0.3 and y > 0.3:
+		$AnimationPlayer.play("diagonal_izq_abajo")
+	elif abs(x) > abs(y):
+		if x > 0:
+			$AnimationPlayer.play("derecha")
+		else:
+			$AnimationPlayer.play("izquierda")
+	else:
+		if y < 0:
+			$AnimationPlayer.play("arriba")
+		else:
+			$AnimationPlayer.play("abajo")
 
 func recibir_dano():
 	vidas_del_enemigo1 -= 1
@@ -78,8 +97,24 @@ func _on_tiempo_prev_al_disparo_timeout():
 
 func disparar():
 	var proyectil = proyectil_enemigo.instance()
-	proyectil.position = $Sprite/PosicionDelDisparo.global_position
-	proyectil.rotation = $Sprite.rotation
+	var direccion_a_jugador = Vector2.ZERO
+	if jugador != null:
+		# Este vector (normalized) es la dirección exacta
+		direccion_a_jugador = (jugador.position - global_position).normalized()
+		
+	var offset_dist = 50  # Distancia desde donde sale el disparo
+	var offset_global = direccion_a_jugador * offset_dist
+	
+	#posición global del proyectil
+	proyectil.position = $Sprite/PosicionDelDisparo.global_position + offset_global
+	
+	# 3. Configurar rotación (se basa en la dirección vectorizada)
+	# La rotación del proyectil se obtiene del ángulo del vector de dirección.
+	proyectil.rotation = direccion_a_jugador.angle() + PI/2
+	
+	# irección vectorizada al proyectil
+	if proyectil.has_method("iniciar"):
+		proyectil.iniciar(direccion_a_jugador) 
 	
 	get_parent().add_child(proyectil)
 
