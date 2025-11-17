@@ -83,6 +83,7 @@ nitro={
 2d_physics/layer_3="jugador_hitbox"
 2d_physics/layer_4="enemigos"
 2d_physics/layer_5="recolectables"
+2d_physics/layer_6="aliado"
 
 [physics]
 
