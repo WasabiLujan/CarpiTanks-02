@@ -7,7 +7,7 @@ var jugador = null
 var movimiento = Vector2.ZERO
 var velocidad = 80
 
-var vidas_del_enemigo1 = 3
+var vidas_del_enemigo1 = 2
 
 var seguir_jugador = false
 var comenzar_a_disparar = false
@@ -37,8 +37,8 @@ func recibir_dano():
 	print("Vidas restantes DEL ENEMIGO: ", vidas_del_enemigo1)
 	if vidas_del_enemigo1 <= 0:
 		vidas_del_enemigo1 = 3
+		get_tree().call_group("Nivel", "enemigo_muerto")
 		queue_free()
-
 
 
 func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del jugador, falta ajustar direccion del sprite
@@ -99,4 +99,3 @@ func _on_Area_de_detenerce_body_exited(body):
 func _verificar_salida():
 	if not detener_mov and not seguir_jugador and not comenzar_a_disparar:
 		jugador = null
-
