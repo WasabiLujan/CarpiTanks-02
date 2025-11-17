@@ -7,7 +7,8 @@ var jugador_cerca = false
 var jugador = null
 var detenerse = false
 
-#var colicionar_con_mundo = false
+var aliado_rescatado = false
+
 
 func _ready():
 	pass
@@ -63,16 +64,6 @@ func _physics_process(delta):
 		
 	move_and_slide(motion)
 	
-	
-	"""
-	if jugador_cerca and not detenerse:
-		motion = position.direction_to(jugador.position)
-		movimiento_aliado()
-
-	
-	motion = motion.normalized() * velocity
-	move_and_slide(motion)
-	"""
 
 func movimiento_aliado():
 	var x = motion.x
@@ -102,6 +93,16 @@ func _on_AreaDeActivacion_body_entered(body):
 	if body.is_in_group("Jugador"):
 		jugador = body
 		jugador_cerca = true
+		
+		aliado_rescatado = jugador_cerca
+		
+		var hud = get_tree().get_root().find_node("HUD", true, false)
+		if hud:
+			hud.save(aliado_rescatado)
+		
+		var nivel = get_tree().get_root().find_node("Nivel", true, false)
+		if nivel:
+			nivel.aliado_rescatado_func()
 	
 
 func _on_AreaDeActivacion_body_exited(body):

@@ -21,6 +21,10 @@ var nitro_cooldown_restante := 0.0
 
 func _ready():
 	ultima_direccion_valida = Vector2.LEFT
+	
+	#HUDpl = canvas_layer.instance()
+	#add_child(HUDpl)
+	#HUDpl.lives_out(vidas_del_p)
 
 func _process(delta):
 	if Input.is_action_just_pressed("shoot"):
@@ -49,7 +53,13 @@ func _physics_process(delta):
 	move_and_slide(vel_vec)
 
 func recibir_dano(): #Codigo para morir
+	
 	vidas_del_p -= 1
+	
+	var hud = get_tree().get_root().find_node("HUD", true, false)
+	if hud:
+		hud.lives_out(vidas_del_p)
+	
 	print("Vidas restantes: ", vidas_del_p)
 	if vidas_del_p <= 0:
 		queue_free()
