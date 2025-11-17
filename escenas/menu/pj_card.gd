@@ -11,7 +11,7 @@ func _ready():
 
 func _on_pj_card_pressed():
 	print("¡Seleccionaste a: " + nombre + "!")
-	get_tree().change_scene("res://escenas/menu/seleccion_tanque.tscn")
+	get_tree().change_scene("res://escenas/esenario_del_nivel/Nivel.tscn")
 
 
 func _on_volver_pressed():
