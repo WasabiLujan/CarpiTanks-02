@@ -12,6 +12,9 @@ var aliado_rescatado = false
 
 
 func _ready():
+	
+	$Timer.start()
+	
 	set_pause_mode(Node.PAUSE_MODE_PROCESS)
 	
 	HUDEne = canvas_enemigo.instance()
