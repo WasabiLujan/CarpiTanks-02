@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tanqueSecarria.png-585bd9c055cb4e0571bf82d638af7bc4.stex"
+path="res://.import/piedritas rotas - %100.png-b005ae43ba398cf0fe44a3d09a06477f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/enemigo_1/tanqueSecarria.png"
-dest_files=[ "res://.import/tanqueSecarria.png-585bd9c055cb4e0571bf82d638af7bc4.stex" ]
+source_file="res://asset/elementos_nvl/piedritas rotas - %100.png"
+dest_files=[ "res://.import/piedritas rotas - %100.png-b005ae43ba398cf0fe44a3d09a06477f.stex" ]
 
 [params]
 

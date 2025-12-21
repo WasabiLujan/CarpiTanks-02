@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fondoLunar.png-efdf480a9806ea6501970c0a012569d3.stex"
+path="res://.import/piedraNO.png-1c21ee3c5c7bacfee88c824f74746c10.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/fondos/fondoLunar.png"
-dest_files=[ "res://.import/fondoLunar.png-efdf480a9806ea6501970c0a012569d3.stex" ]
+source_file="res://asset/elementos_nvl/piedraNO.png"
+dest_files=[ "res://.import/piedraNO.png-1c21ee3c5c7bacfee88c824f74746c10.stex" ]
 
 [params]
 

@@ -14,7 +14,7 @@ onready var enemigo3 = $TextureRect/enemigo_vivo3
 onready var enemigo4 = $TextureRect/enemigo_vivo4
 
 # Número máximo de vidas (ajustalo si es otro)
-const MAX_LIVES = 5
+const MAX_LIVES = 6
 
 func _ready():
 	a_save.visible = false

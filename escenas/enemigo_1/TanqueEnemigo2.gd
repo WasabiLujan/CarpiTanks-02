@@ -46,7 +46,7 @@ func movimiento_enemigo():
 		else:
 			$AnimationPlayer.play("izquierda")
 	else:
-		if y < 0:
+		if y <= 0:
 			$AnimationPlayer.play("arriba")
 		else:
 			$AnimationPlayer.play("abajo")
