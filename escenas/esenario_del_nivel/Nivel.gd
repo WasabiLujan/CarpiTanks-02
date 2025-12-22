@@ -10,8 +10,17 @@ var enemigos_restantes = 0
 var enemigos_del_HUD = 4
 var aliado_rescatado = false
 
+onready var texto_1_rey = $Pantalla_reinciar/Label1
+onready var aviso_restart = $Pantalla_reinciar/aviso_de_restart
+onready var tiempo = $Pantalla_reinciar/TimerS
+
+var cuenta_regreciba = 5
+var reinicio_activo = false
 
 func _ready():
+	texto_1_rey.visible = false
+	aviso_restart.visible = false
+	tiempo.connect("timeout", self, "_on_Timer_timeout")
 	
 	$Timer.start()
 	
@@ -47,6 +56,7 @@ func enemigo_muerto():
 	
 	print("Enemigos restantes:", enemigos_restantes)
 	verificar_victoria()
+	verificar_reinciar_partida()
 
 #Funcion para verificar si el aliado fue rescatado
 func aliado_rescatado_func():
@@ -54,13 +64,44 @@ func aliado_rescatado_func():
 	print("Aliado rescatado!")
 	verificar_victoria()
 
+
+func aliado_caido():
+	aliado_rescatado = false
+	print("y c marchó")
+	HUDEne.no_save()
+	verificar_reinciar_partida()
+
 #Funcion para verificar victoria
 func verificar_victoria():
-	if aliado_rescatado and enemigos_restantes <= 0:
+	if aliado_rescatado == true and enemigos_restantes <= 0:
 		print("GANASTE!")
 		var victoria = load("res://escenas/UI/win.tscn").instance()
 		get_parent().add_child(victoria)
 		
 
+func verificar_reinciar_partida():
+	print("verificando reinicio")
+	if reinicio_activo:
+		print("AUN NO")
+		return #No entiendo de que sirve este condicional
+	
+	if not aliado_rescatado and enemigos_restantes <= 0:
+		print("se reinicia")
+		reinicio_activo = true
+		cuenta_regreciba = 5 # Creo que este se puede obear
+		texto_1_rey.visible = true
+		aviso_restart.visible = true
+		aviso_restart.text = "Preparate tienes otra oportunidad en %d..." % cuenta_regreciba
+		tiempo.start()
+		
 
 
+func _on_TimerS_timeout():
+	cuenta_regreciba -= 1
+	
+	if cuenta_regreciba > 0:
+		aviso_restart.text = "Preparate tienes otra oportunidad en %d..." % cuenta_regreciba
+		print("aviso_restart.text")
+	else:
+		tiempo.stop()
+		get_tree().reload_current_scene()

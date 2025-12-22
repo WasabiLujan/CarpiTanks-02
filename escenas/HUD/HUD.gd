@@ -14,7 +14,7 @@ onready var enemigo3 = $TextureRect/enemigo_vivo3
 onready var enemigo4 = $TextureRect/enemigo_vivo4
 
 # Número máximo de vidas (ajustalo si es otro)
-const MAX_LIVES = 6
+const MAX_LIVES = 5
 
 func _ready():
 	a_save.visible = false
@@ -33,9 +33,13 @@ func actualizar_vistas_de_vidas(vidas):
 	Live4.visible = vidas >= 4
 	Live5.visible = vidas >= 5
 
+
 # Aliado
 func save(aliado_rescatado):
 	a_save.visible = bool(aliado_rescatado)
+
+func no_save():
+	a_save.visible = false
 
 # Enemigos restantes (versión usando comparaciones, no booleanos raros)
 func cuantos_enemigos_restan(enemigos_del_HUD):

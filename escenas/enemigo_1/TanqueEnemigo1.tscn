@@ -168,6 +168,7 @@ script = ExtResource( 2 )
 position = Vector2( 2.83376, -0.00317229 )
 rotation = -0.00111946
 scale = Vector2( 0.233, 0.206 )
+z_index = 1
 texture = ExtResource( 1 )
 hframes = 8
 

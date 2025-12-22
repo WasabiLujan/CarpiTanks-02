@@ -216,13 +216,14 @@ shape = SubResource( 5 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 8.0
 
-[node name="Controles" type="Node" parent="."]
+[node name="Controles" type="CanvasLayer" parent="."]
 
 [node name="mov" type="Label" parent="Controles"]
 margin_left = 398.0
 margin_top = 245.0
 margin_right = 626.0
 margin_bottom = 276.0
+custom_colors/font_color_shadow = Color( 0.0588235, 0.356863, 0.105882, 1 )
 text = "\"A,S,D,W\" o el Stick  para moverse  "
 script = ExtResource( 12 )
 
@@ -231,6 +232,7 @@ margin_left = 400.0
 margin_top = 282.0
 margin_right = 603.0
 margin_bottom = 381.0
+custom_colors/font_color_shadow = Color( 0.0431373, 0.431373, 0.0470588, 1 )
 text = "P o Y = Pausa
 
 Habilidades:
@@ -239,11 +241,38 @@ Barra o  X  en joystick = Disparo
 "
 script = ExtResource( 14 )
 
-[node name="Musica" type="AudioStreamPlayer2D" parent="."]
-
 [node name="Node2D" parent="." instance=ExtResource( 13 )]
 position = Vector2( 2542, 3603 )
+
+[node name="Musica" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Pantalla_reinciar" type="CanvasLayer" parent="."]
+
+[node name="Label1" type="Label" parent="Pantalla_reinciar"]
+margin_left = 342.0
+margin_top = 403.0
+margin_right = 583.0
+margin_bottom = 434.0
+custom_colors/font_outline_modulate = Color( 0.905882, 0.701961, 0.054902, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "¡Has derrotado a todos los invasores! 
+pero tu aliado no ha sobrevivído :'("
+align = 1
+
+[node name="TimerS" type="Timer" parent="Pantalla_reinciar"]
+wait_time = 5.0
+
+[node name="aviso_de_restart" type="Label" parent="Pantalla_reinciar"]
+margin_left = 363.0
+margin_top = 447.0
+margin_right = 403.0
+margin_bottom = 461.0
+custom_colors/font_outline_modulate = Color( 0.988235, 0.639216, 0.0392157, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+align = 1
+valign = 2
 
 [connection signal="timeout" from="Timer" to="Controles" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="Controles/mov" method="_on_Timer_timeout"]
 [connection signal="timeout" from="Timer" to="Controles/habilidades" method="_on_Timer_timeout"]
+[connection signal="timeout" from="Pantalla_reinciar/TimerS" to="." method="_on_TimerS_timeout"]

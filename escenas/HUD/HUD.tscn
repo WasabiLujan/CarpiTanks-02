@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://asset/HUD/vida.png" type="Texture" id=1]
 [ext_resource path="res://asset/HUD/fondo.png" type="Texture" id=2]
 [ext_resource path="res://escenas/HUD/HUD.gd" type="Script" id=3]
 [ext_resource path="res://asset/HUD/aliado_salvado.png" type="Texture" id=4]
 [ext_resource path="res://asset/HUD/enemigo item.png" type="Texture" id=5]
+[ext_resource path="res://asset/HUD/Vidas mate.png" type="Texture" id=6]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 3 )
@@ -18,28 +18,28 @@ expand = true
 
 [node name="V1" type="Sprite" parent="TextureRect"]
 position = Vector2( 60, 18 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 1 )
+scale = Vector2( 0.04, 0.04 )
+texture = ExtResource( 6 )
 
 [node name="V2" type="Sprite" parent="TextureRect"]
 position = Vector2( 93, 18 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 1 )
+scale = Vector2( 0.04, 0.04 )
+texture = ExtResource( 6 )
 
 [node name="V3" type="Sprite" parent="TextureRect"]
 position = Vector2( 124, 18 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 1 )
+scale = Vector2( 0.04, 0.04 )
+texture = ExtResource( 6 )
 
 [node name="V4" type="Sprite" parent="TextureRect"]
 position = Vector2( 155, 18 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 1 )
+scale = Vector2( 0.04, 0.04 )
+texture = ExtResource( 6 )
 
 [node name="V5" type="Sprite" parent="TextureRect"]
 position = Vector2( 186, 18 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 1 )
+scale = Vector2( 0.04, 0.04 )
+texture = ExtResource( 6 )
 
 [node name="Vidas" type="Label" parent="TextureRect"]
 anchor_top = 0.273

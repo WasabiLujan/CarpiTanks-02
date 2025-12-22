@@ -13,25 +13,26 @@ var seguir_jugador = false
 var comenzar_a_disparar = false
 var detener_mov = false
 
-func _physics_process(delta):
-	movimiento = Vector2.ZERO
-	
-	if jugador != null and not detener_mov:
-		movimiento = position.direction_to(jugador.position)
-	else:
-		movimiento = Vector2.ZERO
-	
-	movimiento = movimiento.normalized() * velocidad
-		
-	movimiento_enemigo()
-	movimiento = movimiento.normalized() * velocidad
-	move_and_slide(movimiento)
-	
-	
-func movimiento_enemigo():
-	var x = movimiento.x
-	var y = movimiento.y
 
+func _physics_process(delta):
+	if jugador == null or detener_mov:
+		move_and_slide(Vector2.ZERO)
+		return
+	
+	movimiento = (jugador.global_position - global_position)
+	
+	if movimiento.length() > 1:
+		movimiento = movimiento.normalized() * velocidad
+		movimiento_enemigo(movimiento)
+		move_and_slide(movimiento)
+
+func movimiento_enemigo(dir):
+	var x = dir.x
+	var y = dir.y
+
+	if abs(x) < 0.1 and abs(y) < 0.1:
+		return  # no cambiar animación si está quieto
+	
 	if x > 0.3 and y < -0.3:
 		$AnimationPlayer.play("diagonal_der_arriba")
 	elif x > 0.3 and y > 0.3:
@@ -46,10 +47,11 @@ func movimiento_enemigo():
 		else:
 			$AnimationPlayer.play("izquierda")
 	else:
-		if y <= 0:
+		if y < 0:
 			$AnimationPlayer.play("arriba")
 		else:
 			$AnimationPlayer.play("abajo")
+
 
 func recibir_dano():
 	vidas_del_enemigo1 -= 1
@@ -58,7 +60,6 @@ func recibir_dano():
 		vidas_del_enemigo1 = 3
 		get_tree().call_group("Nivel", "enemigo_muerto")
 		queue_free()
-
 
 
 func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del jugador, falta ajustar direccion del sprite
@@ -96,28 +97,20 @@ func _on_tiempo_prev_al_disparo_timeout():
 		disparar()
 
 func disparar():
+	if jugador == null:
+		return
+	
 	var proyectil = proyectil_enemigo.instance()
-	var direccion_a_jugador = Vector2.ZERO
-	if jugador != null:
-		# Este vector (normalized) es la dirección exacta
-		direccion_a_jugador = (jugador.position - global_position).normalized()
-		
-	var offset_dist = 50  # Distancia desde donde sale el disparo
-	var offset_global = direccion_a_jugador * offset_dist
 	
-	#posición global del proyectil
-	proyectil.position = $Sprite/PosicionDelDisparo.global_position + offset_global
+	var direccion = (jugador.global_position - global_position).normalized()
 	
-	# 3. Configurar rotación (se basa en la dirección vectorizada)
-	# La rotación del proyectil se obtiene del ángulo del vector de dirección.
-	proyectil.rotation = direccion_a_jugador.angle() + PI/2
+	proyectil.global_position = $Sprite/PosicionDelDisparo.global_position
+	proyectil.rotation = direccion.angle() + PI/2
 	
-	# irección vectorizada al proyectil
 	if proyectil.has_method("iniciar"):
-		proyectil.iniciar(direccion_a_jugador) 
+		proyectil.iniciar(direccion)
 	
 	get_parent().add_child(proyectil)
-
 
 
 func _on_Area_de_detenerce_body_entered(body):

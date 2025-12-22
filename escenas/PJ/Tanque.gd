@@ -66,6 +66,16 @@ func recibir_dano(): #Codigo para morir
 		var game_over = load("res://escenas/UI/game_over.tscn").instance()
 		get_parent().add_child(game_over)
 
+func sumar_vida(cantidad := 1):
+	vidas_del_p += cantidad
+	vidas_del_p = min(vidas_del_p, 5)
+
+	var hud = get_tree().get_root().find_node("HUD", true, false)
+	if hud:
+		hud.lives_out(vidas_del_p)
+
+	print("Vidas actuales: ", vidas_del_p)
+
 
 func _manejar_input():
 	if Input.is_action_pressed("ui_up"):

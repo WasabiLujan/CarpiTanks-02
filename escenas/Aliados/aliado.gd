@@ -123,16 +123,6 @@ func _on_AreaParaDetenerce_body_exited(body):
 	if body.is_in_group("Jugador"):
 		detenerse = false
 
-func recibir_dano():
-	vidas_del_aliado -= 1
-	print("Vidas restantes DEL ALIADO: ", vidas_del_aliado)
-	if vidas_del_aliado <= 0:
-		vidas_del_aliado = 2
-		get_tree().call_group("Nivel", "enemigo_muerto")
-		queue_free()
-
-
-
 func _on_AreadaDeDao_body_entered(body):
 	vidas_del_aliado -= 1
 	print ("Aliado: Auch!")
@@ -140,5 +130,6 @@ func _on_AreadaDeDao_body_entered(body):
 	if vidas_del_aliado <= 0:
 		print ("Aliado: Auch!")
 		print("F aliado")
-		hud.save(not aliado_rescatado)
+		var nivel = get_parent()
+		nivel.aliado_caido()
 		queue_free()
