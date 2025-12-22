@@ -9,6 +9,7 @@ var pausa = null
 var enemigos_restantes = 0
 var enemigos_del_HUD = 4
 var aliado_rescatado = false
+var aliado_muerto = false
 
 onready var texto_1_rey = $Pantalla_reinciar/Label1
 onready var aviso_restart = $Pantalla_reinciar/aviso_de_restart
@@ -67,6 +68,7 @@ func aliado_rescatado_func():
 
 func aliado_caido():
 	aliado_rescatado = false
+	aliado_muerto = true
 	print("y c marchó")
 	HUDEne.no_save()
 	verificar_reinciar_partida()
@@ -85,7 +87,7 @@ func verificar_reinciar_partida():
 		print("AUN NO")
 		return #No entiendo de que sirve este condicional
 	
-	if not aliado_rescatado and enemigos_restantes <= 0:
+	if aliado_muerto and enemigos_restantes <= 0:
 		print("se reinicia")
 		reinicio_activo = true
 		cuenta_regreciba = 5 # Creo que este se puede obear

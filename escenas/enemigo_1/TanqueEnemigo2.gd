@@ -7,49 +7,48 @@ var jugador = null
 var movimiento = Vector2.ZERO
 var velocidad = 80
 
-var vidas_del_enemigo1 = 4
+var vidas_del_enemigo1 = 2
 
 var seguir_jugador = false
 var comenzar_a_disparar = false
 var detener_mov = false
 
+
 func _physics_process(delta):
 	movimiento = Vector2.ZERO
-	
-	if jugador != null and not detener_mov:
-		movimiento = position.direction_to(jugador.position)
-	else:
-		movimiento = Vector2.ZERO
-	
-	movimiento = movimiento.normalized() * velocidad
-		
-	movimiento_enemigo()
-	movimiento = movimiento.normalized() * velocidad
-	move_and_slide(movimiento)
-	
-	
-func movimiento_enemigo():
-	var x = movimiento.x
-	var y = movimiento.y
+	if jugador:
+		movimiento = position.direction_to(jugador.position) * velocidad
+		movimiento_enemigo(movimiento)
+	movimiento = move_and_slide(movimiento)
 
-	if x > 0.3 and y < -0.3:
+func movimiento_enemigo(dir):
+	
+	if dir.length() < 0.01:
+		return  # quieto, no cambiar animación
+
+	var d = dir.normalized()
+	var angle = rad2deg(d.angle())
+
+	# Ajuste para que 0° sea "arriba"
+	angle = fposmod(angle + 90, 360)
+
+	if angle < 22.5 or angle >= 337.5:
+		$AnimationPlayer.play("arriba")
+	elif angle < 67.5:
 		$AnimationPlayer.play("diagonal_der_arriba")
-	elif x > 0.3 and y > 0.3:
+	elif angle < 112.5:
+		$AnimationPlayer.play("derecha")
+	elif angle < 157.5:
 		$AnimationPlayer.play("diagonal_der_abajo")
-	elif x < -0.3 and y < -0.3:
-		$AnimationPlayer.play("diagonal_izq_arriba")
-	elif x < -0.3 and y > 0.3:
+	elif angle < 202.5:
+		$AnimationPlayer.play("abajo")
+	elif angle < 247.5:
 		$AnimationPlayer.play("diagonal_izq_abajo")
-	elif abs(x) > abs(y):
-		if x > 0:
-			$AnimationPlayer.play("derecha")
-		else:
-			$AnimationPlayer.play("izquierda")
+	elif angle < 292.5:
+		$AnimationPlayer.play("izquierda")
 	else:
-		if y <= 0:
-			$AnimationPlayer.play("arriba")
-		else:
-			$AnimationPlayer.play("abajo")
+		$AnimationPlayer.play("diagonal_izq_arriba")
+	
 
 func recibir_dano():
 	vidas_del_enemigo1 -= 1
@@ -60,17 +59,12 @@ func recibir_dano():
 		queue_free()
 
 
-
 func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del jugador, falta ajustar direccion del sprite
 	if body.is_in_group("Jugador"):
-		seguir_jugador = true
 		jugador = body
 
 func _on_Area2D_body_exited(body):
-	if body.is_in_group("Jugador"):
-		seguir_jugador = false
-		_verificar_salida()
-	#jugador = null
+	jugador = null
 
 
 
@@ -87,7 +81,6 @@ func _on_Area_de_comenzar_a_disparar_body_exited(body):
 		jugador = null
 		#Detener el disparo
 		$tiempo_prev_al_disparo.stop()
-		_verificar_salida()
 
 
 
@@ -96,42 +89,29 @@ func _on_tiempo_prev_al_disparo_timeout():
 		disparar()
 
 func disparar():
+	if jugador == null:
+		return
+	
 	var proyectil = proyectil_enemigo.instance()
-	var direccion_a_jugador = Vector2.ZERO
-	if jugador != null:
-		# Este vector (normalized) es la dirección exacta
-		direccion_a_jugador = (jugador.position - global_position).normalized()
-		
-	var offset_dist = 50  # Distancia desde donde sale el disparo
-	var offset_global = direccion_a_jugador * offset_dist
 	
-	#posición global del proyectil
-	proyectil.position = $Sprite/PosicionDelDisparo.global_position + offset_global
+	var direccion = (jugador.global_position - global_position).normalized()	 
 	
-	# 3. Configurar rotación (se basa en la dirección vectorizada)
-	# La rotación del proyectil se obtiene del ángulo del vector de dirección.
-	proyectil.rotation = direccion_a_jugador.angle() + PI/2
+	proyectil.global_position = $Sprite/PosicionDelDisparo.global_position
+	proyectil.rotation = direccion.angle() + PI/2
 	
-	# irección vectorizada al proyectil
 	if proyectil.has_method("iniciar"):
-		proyectil.iniciar(direccion_a_jugador) 
+		proyectil.iniciar(direccion)
 	
 	get_parent().add_child(proyectil)
-
 
 
 func _on_Area_de_detenerce_body_entered(body):
 	if body.is_in_group("Jugador"):
 		detener_mov = true
 		jugador = body
-		#movimiento = Vector2.ZERO
+
 
 func _on_Area_de_detenerce_body_exited(body):
 	if body.is_in_group("Jugador"):
 		detener_mov = false
-		_verificar_salida()
 
-
-func _verificar_salida():
-	if not detener_mov and not seguir_jugador and not comenzar_a_disparar:
-		jugador = null

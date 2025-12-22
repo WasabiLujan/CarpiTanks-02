@@ -13,45 +13,63 @@ var seguir_jugador = false
 var comenzar_a_disparar = false
 var detener_mov = false
 
+export var distancia_minima := 120
 
 func _physics_process(delta):
-	if jugador == null or detener_mov:
-		move_and_slide(Vector2.ZERO)
+	""""
+	if jugador == null:
 		return
-	
-	movimiento = (jugador.global_position - global_position)
-	
-	if movimiento.length() > 1:
-		movimiento = movimiento.normalized() * velocidad
+
+	var to_player = jugador.global_position - global_position
+	var distancia = to_player.length()
+	var direccion = to_player.normalized()
+
+	# Animación SIEMPRE apunta al jugador
+	movimiento_enemigo(direccion)
+
+	# Movimiento SOLO si está lejos
+	if distancia > distancia_minima:
+		movimiento = direccion * velocidad
+	else:
+		movimiento = Vector2.ZERO
+
+	move_and_slide(movimiento)
+	"""
+	movimiento = Vector2.ZERO
+	if jugador:
+		movimiento = position.direction_to(jugador.position) * velocidad #POR ACA PUEDE SER
 		movimiento_enemigo(movimiento)
-		move_and_slide(movimiento)
+	movimiento = move_and_slide(movimiento)
+
 
 func movimiento_enemigo(dir):
-	var x = dir.x
-	var y = dir.y
-
-	if abs(x) < 0.1 and abs(y) < 0.1:
-		return  # no cambiar animación si está quieto
 	
-	if x > 0.3 and y < -0.3:
-		$AnimationPlayer.play("diagonal_der_arriba")
-	elif x > 0.3 and y > 0.3:
-		$AnimationPlayer.play("diagonal_der_abajo")
-	elif x < -0.3 and y < -0.3:
-		$AnimationPlayer.play("diagonal_izq_arriba")
-	elif x < -0.3 and y > 0.3:
-		$AnimationPlayer.play("diagonal_izq_abajo")
-	elif abs(x) > abs(y):
-		if x > 0:
-			$AnimationPlayer.play("derecha")
-		else:
-			$AnimationPlayer.play("izquierda")
-	else:
-		if y < 0:
-			$AnimationPlayer.play("arriba")
-		else:
-			$AnimationPlayer.play("abajo")
+	if dir.length() < 0.01:
+		return  # quieto, no cambiar animación
 
+	var d = dir.normalized()
+	var angle = rad2deg(d.angle())
+
+	# Ajuste para que 0° sea "arriba"
+	angle = fposmod(angle + 90, 360)
+
+	if angle < 22.5 or angle >= 337.5:
+		$AnimationPlayer.play("arriba")
+	elif angle < 67.5:
+		$AnimationPlayer.play("diagonal_der_arriba")
+	elif angle < 112.5:
+		$AnimationPlayer.play("derecha")
+	elif angle < 157.5:
+		$AnimationPlayer.play("diagonal_der_abajo")
+	elif angle < 202.5:
+		$AnimationPlayer.play("abajo")
+	elif angle < 247.5:
+		$AnimationPlayer.play("diagonal_izq_abajo")
+	elif angle < 292.5:
+		$AnimationPlayer.play("izquierda")
+	else:
+		$AnimationPlayer.play("diagonal_izq_arriba")
+	
 
 func recibir_dano():
 	vidas_del_enemigo1 -= 1
@@ -64,14 +82,10 @@ func recibir_dano():
 
 func _on_Area2D_body_entered(body): #Con este puede perseguir al tanque del jugador, falta ajustar direccion del sprite
 	if body.is_in_group("Jugador"):
-		seguir_jugador = true
 		jugador = body
 
 func _on_Area2D_body_exited(body):
-	if body.is_in_group("Jugador"):
-		seguir_jugador = false
-		_verificar_salida()
-	#jugador = null
+	jugador = null
 
 
 
@@ -88,7 +102,6 @@ func _on_Area_de_comenzar_a_disparar_body_exited(body):
 		jugador = null
 		#Detener el disparo
 		$tiempo_prev_al_disparo.stop()
-		_verificar_salida()
 
 
 
@@ -102,7 +115,7 @@ func disparar():
 	
 	var proyectil = proyectil_enemigo.instance()
 	
-	var direccion = (jugador.global_position - global_position).normalized()
+	var direccion = (jugador.global_position - global_position).normalized()	 
 	
 	proyectil.global_position = $Sprite/PosicionDelDisparo.global_position
 	proyectil.rotation = direccion.angle() + PI/2
@@ -115,16 +128,11 @@ func disparar():
 
 func _on_Area_de_detenerce_body_entered(body):
 	if body.is_in_group("Jugador"):
-		detener_mov = true
 		jugador = body
-		#movimiento = Vector2.ZERO
+
 
 func _on_Area_de_detenerce_body_exited(body):
 	if body.is_in_group("Jugador"):
 		detener_mov = false
-		_verificar_salida()
 
 
-func _verificar_salida():
-	if not detener_mov and not seguir_jugador and not comenzar_a_disparar:
-		jugador = null
